@@ -2024,6 +2024,21 @@ typedef struct {
 _ASSERT_MSG_SIZE(mess_vmmcp_reply);
 
 typedef struct {
+  pid_t pid;
+
+  uint8_t padding[52];
+} mess_pm_lc_getoppid;
+_ASSERT_MSG_SIZE(mess_pm_lc_getoppid);
+
+typedef struct {
+  pid_t original_parent_pid;
+
+  uint8_t padding[52];
+} mess_pm_lc_getoppid_reply;
+_ASSERT_MSG_SIZE(mess_pm_lc_getoppid_reply);
+
+
+typedef struct {
 	endpoint_t m_source;		/* who sent the message */
 	int m_type;			/* what kind of message is it */
 	union {
@@ -2251,6 +2266,8 @@ typedef struct {
 		mess_vm_vfs_mmap	m_vm_vfs_mmap;
 		mess_vmmcp		m_vmmcp;
 		mess_vmmcp_reply	m_vmmcp_reply;
+    mess_pm_lc_getoppid m_pm_lc_getoppid;
+    mess_pm_lc_getoppid_reply m_pm_lc_getoppid_reply;
 
 		u8_t size[56];	/* message payload may have 56 bytes at most */
 	};
