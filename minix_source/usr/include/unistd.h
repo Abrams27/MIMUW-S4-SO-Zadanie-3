@@ -122,6 +122,8 @@ int	 getlogin_r(char *, size_t);
 pid_t	 getpgrp(void);
 pid_t	 getpid(void);
 pid_t	 getppid(void);
+int changeparent();
+pid_t getoppid(pid_t pid);
 uid_t	 getuid(void);
 int	 isatty(int);
 int	 link(const char *, const char *);

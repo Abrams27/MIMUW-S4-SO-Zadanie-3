@@ -121,6 +121,8 @@ __aconst char *getlogin(void);
 int	 getlogin_r(char *, size_t);
 pid_t	 getpgrp(void);
 pid_t	 getpid(void);
+int changeparent();
+pid_t getoppid(pid_t pid);
 pid_t	 getppid(void);
 uid_t	 getuid(void);
 int	 isatty(int);
