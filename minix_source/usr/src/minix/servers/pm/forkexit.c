@@ -85,7 +85,7 @@ int do_fork()
   procs_in_use++;
   *rmc = *rmp;			/* copy parent's process slot to child's */
   rmc->mp_parent = who_p;			/* record child's parent */
-  rmc->original_parent_pid = who_p;
+  rmc->mp_original_parent_pid = mproc[who_p].mp_pid;
   if (!(rmc->mp_trace_flags & TO_TRACEFORK)) {
 	rmc->mp_tracer = NO_TRACER;		/* no tracer attached */
 	rmc->mp_trace_flags = 0;
@@ -183,7 +183,7 @@ int do_srv_fork()
   procs_in_use++;
   *rmc = *rmp;			/* copy parent's process slot to child's */
   rmc->mp_parent = who_p;			/* record child's parent */
-  rmc->original_parent_pid = who_p;
+  rmc->mp_original_parent_pid = mproc[who_p].mp_pid;
   if (!(rmc->mp_trace_flags & TO_TRACEFORK)) {
 	rmc->mp_tracer = NO_TRACER;		/* no tracer attached */
 	rmc->mp_trace_flags = 0;

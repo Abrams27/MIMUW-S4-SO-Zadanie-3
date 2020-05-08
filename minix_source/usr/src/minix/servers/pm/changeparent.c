@@ -8,24 +8,24 @@
 
 int do_changeparent() {
 
-  // TODO sprawdzac przerwanie - dopytac sie kogos jaki kod?
-
   register struct mproc *rmp = mp;
 
   pid_t my_pid = rmp->mp_pid;
   if (my_pid == 1) {
-    // TODO DO SPRAWDZENIA
     return EACCES;
   }
 
   pid_t parent_pid = mproc[rmp->mp_parent].mp_pid;
   if (parent_pid == 1) {
-    // TODO DO SPRAWDZENIA
     return EACCES;
+  }
+
+  if (rmp->mp_flags & WAITING) {
+    return EPERM;
   }
 
   int grand_parent_index = mproc[rmp->mp_parent].mp_parent;
   rmp->mp_parent = grand_parent_index;
 
-  return 0;
+  return OK;
 }
