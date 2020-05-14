@@ -8,13 +8,17 @@
 pid_t getoppid(pid_t pid) {
 
   message mess;
-  memset(&mess, 0, sizeof(mess));
 
-  mess.m_pm_lc_getoppid.pid = pid;
-  // TODO SPRAWDZENIE INNYCH ERRNO
-  if (_syscall(PM_PROC_NR, PM_GETOPPID, &mess) < 0) {
+  endpoint_t pm_ep;
+  if (minix_rs_lookup("pm", &pm_ep) != 0) {
+    errno = ENOSYS;
     return (-1);
   }
 
-  return mess.m_pm_lc_getoppid_reply.original_parent_pid;
+  mess.m_lc_pm_getsid.pid = pid;
+  if (_syscall(pm_ep, PM_GETOPPID, &mess) < 0) {
+    return (-1);
+  }
+
+  return mess.m_lc_pm_getsid.pid;
 }

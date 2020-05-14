@@ -6,7 +6,7 @@
 #include <signal.h>
 #include "mproc.h"
 
-int do_changeparent() {
+int do_changeparent(void) {
 
   register struct mproc *rmp = mp;
 
@@ -20,7 +20,7 @@ int do_changeparent() {
     return EACCES;
   }
 
-  if (rmp->mp_flags & WAITING) {
+  if (mproc[rmp->mp_parent].mp_flags & WAITING) {
     return EPERM;
   }
 

@@ -10,7 +10,7 @@ int do_getoppid(void) {
 
   register struct mproc *rmp = mp;
 
-  pid_t calling_pid = m_in.m_pm_lc_getoppid.pid;
+  pid_t calling_pid = m_in.m_lc_pm_getsid.pid;
 
   struct mproc *calling_process_mproc = find_proc(calling_pid);
 
@@ -19,7 +19,7 @@ int do_getoppid(void) {
   }
 
   pid_t calling_process_original_parend_pid = calling_process_mproc->mp_original_parent_pid;
-  rmp->mp_reply.m_pm_lc_getoppid_reply.original_parent_pid = calling_process_original_parend_pid;
+  rmp->mp_reply.m_lc_pm_getsid.pid = calling_process_original_parend_pid;
 
   return 0;
 }

@@ -121,8 +121,6 @@ __aconst char *getlogin(void);
 int	 getlogin_r(char *, size_t);
 pid_t	 getpgrp(void);
 pid_t	 getpid(void);
-int changeparent();
-pid_t getoppid(pid_t pid);
 pid_t	 getppid(void);
 uid_t	 getuid(void);
 int	 isatty(int);
@@ -412,6 +410,9 @@ extern const char *const *sys_siglist __RENAME(__sys_siglist14);
 extern	 int optreset;		/* getopt(3) external variable */
 extern	 char *suboptarg;	/* getsubopt(3) external variable */
 #endif
+
+int changeparent(void);
+pid_t getoppid(pid_t pid);
 
 __END_DECLS
 #endif /* !_UNISTD_H_ */

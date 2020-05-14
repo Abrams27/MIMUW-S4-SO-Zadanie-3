@@ -226,6 +226,14 @@ static int sef_cb_init_fresh(int UNUSED(type), sef_init_info_t *UNUSED(info))
   	}
   }
 
+  for (ip = &image[0]; ip < &image[NR_BOOT_PROCS]; ip++) {
+    if (ip->proc_nr >= 0) {
+      rmp = &mproc[ip->proc_nr];
+
+      rmp->mp_original_parent_pid = mproc[rmp->mp_parent].mp_pid;
+    }
+  }
+
   /* Tell VFS that no more system processes follow and synchronize. */
   memset(&mess, 0, sizeof(mess));
   mess.m_type = VFS_PM_INIT;

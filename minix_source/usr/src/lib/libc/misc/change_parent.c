@@ -5,12 +5,17 @@
 #include <unistd.h>
 #include <minix/rs.h>
 
-int changeparent() {
+int changeparent(void) {
 
   message mess;
-  memset(&mess, 0, sizeof(mess));
 
-  if (_syscall(PM_PROC_NR, PM_CHANGE_PARENT, &mess) < 0) {
+  endpoint_t pm_ep;
+  if (minix_rs_lookup("pm", &pm_ep) != 0) {
+    errno = ENOSYS;
+    return (-1);
+  }
+
+  if (_syscall(pm_ep, PM_CHANGE_PARENT, &mess) < 0) {
     return (-1);
   }
 
