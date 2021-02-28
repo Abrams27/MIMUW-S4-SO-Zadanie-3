@@ -1,2 +1,2 @@
 # MIMUW-S4-SO-Zadanie-3
-Zadanie nr. 3 na systemy operacyjne
+[Minix source code](https://www.minix3.org) edited by me for the SO class.
